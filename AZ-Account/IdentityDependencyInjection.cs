@@ -10,6 +10,7 @@ public static class IdentityDependencyInjection
     public static IServiceCollection AddIdentity(this IServiceCollection services)
     {
 
+
         // Add ASP.NET Core Identity
         services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
             .AddEntityFrameworkStores<AccountContext>()

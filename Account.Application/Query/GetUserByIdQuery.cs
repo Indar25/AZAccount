@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 
 namespace Account.Application.Query;
-public record GetUserByIdQuery(Guid id) : IRequest<UserDto>;
+public record GetUserByIdQuery(string email) : IRequest<UserDto>;
 
 public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserDto>
 {
@@ -20,7 +20,7 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserDto
 
     public async Task<UserDto> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
     {
-        var user = await _userManager.FindByIdAsync(request.id.ToString());
+        var user = await _userManager.FindByEmailAsync(request.email);
         return _mapper.Map<UserDto>(user);
     }
 }

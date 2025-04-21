@@ -8,10 +8,10 @@ namespace AZ_Account.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AccountController : ControllerBase
+public class UserController : ControllerBase
 {
     private readonly IMediator _mediator;
-    public AccountController(IMediator mediator)
+    public UserController(IMediator mediator)
     {
         _mediator = mediator;
     }
@@ -28,8 +28,8 @@ public class AccountController : ControllerBase
         var users = await _mediator.Send(new GetUserQuery());
         return Ok(users);
     }
-    [HttpGet("GetUserById")]
-    public async Task<IActionResult> GetUserById(GetUserByIdQuery query)
+    [HttpPost("GetUserByEmail")]
+    public async Task<IActionResult> GetUserById([FromBody]GetUserByIdQuery query)
     {
         var user = await _mediator.Send(query);
         return Ok(user);

@@ -13,6 +13,8 @@ public static class Config
             ClientSecrets = { new Secret("secret".Sha256()) },
             AllowedScopes = {
                         "account.api",
+                        "order.api",
+                        "payment.api",
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Email
@@ -25,11 +27,17 @@ public static class Config
         }
     };
 
-    public static IEnumerable<ApiScope> ApiScopes => new[] { new ApiScope("account.api", "Account API") };
+    public static IEnumerable<ApiScope> ApiScopes => new[] {
+            new ApiScope("account.api", "Account API"),
+            new ApiScope("order.api", "Order API"),
+            new ApiScope("payment.api", "Payment API")
+    };
 
     public static IEnumerable<ApiResource> ApiResources => new[]
     {
-        new ApiResource("account.api") { Scopes = { "account.api" } }
+        new ApiResource("account.api") { Scopes = { "account.api" } },
+        new ApiResource("order.api") { Scopes = { "order.api" } },
+        new ApiResource("payment.api") { Scopes = { "payment.api" } }
     };
 
     public static IEnumerable<IdentityResource> IdentityResources => new IdentityResource[]
